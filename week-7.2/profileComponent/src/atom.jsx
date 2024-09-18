@@ -1,5 +1,6 @@
-import { atom } from 'recoil'
 
+
+import { atom } from 'recoil'
 export const profileAtom = atom({
   key: "profileAtom",
   default: [{
