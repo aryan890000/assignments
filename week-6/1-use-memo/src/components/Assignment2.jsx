@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useMemo } from "react";
 
 // In this assignment, you will create a component that renders a large list of sentences and includes an input field for filtering these items. 
 // The goal is to use useMemo to optimize the filtering process, ensuring the list is only re-calculated when necessary (e.g., when the filter criteria changes).
@@ -22,12 +22,31 @@ export function Assignment2() {
 
     const filteredSentences = sentences.filter(x => x.includes(filter))
 
-    return <div>
+    return(
+    <>
+        <AppPart2 />
+        <div>
         <input type="text" onChange={(e) => {
             setFilter(e.target.value)
         }}></input>
         {filteredSentences.map(word => <div>
             {word}    
         </div>)}
-    </div>
+         </div>
+    </>
+)}
+
+function AppPart2(){
+    const [newsentences, setnewSentences] = useState(ALL_WORDS);
+    const [newfiter , setNewFliter] = useState("")
+
+    const newFliteredSentances = useMemo(()=>{
+        return newsentences.filter(z => z.includes(newfiter))
+    },[newfiter,newsentences])
+    return(
+        <>
+            <input type="text" onChange={(e)=>setNewFliter(e.target.value)}></input>
+            {newFliteredSentances.map((word)=> <div>{word}</div>)}
+        </>
+    )
 }
