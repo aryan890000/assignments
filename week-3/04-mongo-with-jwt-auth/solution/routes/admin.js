@@ -79,3 +79,4 @@ router.get('/courses', adminMiddleware, async (req, res) => {
 
 
 module.exports = router;
+
