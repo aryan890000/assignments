@@ -32,6 +32,8 @@ router.get('/courses',async (req, res) => {
         course:response
     })
 
+
+
 });
 
 router.post('/courses/:courseId', userMiddleware,async (req, res) => {
@@ -59,7 +61,7 @@ router.get('/purchasedCourses', userMiddleware,async (req, res) => {
 
     console.log(uesr.purchasedCourses);
     const courses= await Course.find({
-        _id:{
+        _id:{//in database couurseId is not a thing there is _id is given for that
             "$in":user.purchasedCourses
         }
     });

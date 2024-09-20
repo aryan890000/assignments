@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://admin:kOaiggThGaxMW7MX@cluster0.oubaxcd.mongodb.net/');
+mongoose.connect('mongodb+srv://admin:kOaiggThGaxMW7MX@cluster0.oubaxcd.mongodb.net/');//end m /some_name toh woh uske undre bann jayenge database
 
 // Define schemas
 const AdminSchema = new mongoose.Schema({
@@ -37,3 +37,5 @@ module.exports = {
     User,
     Course
 }
+
+//exporting this and whoever wants to use it can import it easily like Admin.create blabla

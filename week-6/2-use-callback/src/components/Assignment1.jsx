@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 
 // Create a counter component with increment and decrement functions. Pass these functions to a child component which has buttons to perform the increment and decrement actions. Use useCallback to ensure that these functions are not recreated on every render.
 
@@ -6,14 +6,23 @@ export function Assignment1() {
     const [count, setCount] = useState(0);
 
     // Your code starts here
-    function handleIncrement() {
+    const handleIncrement=useCallback(()=>{
+            // setCount(count+1);
+            setCount(function(count){
+                return count+1;
+            })
+    },[]) 
+    //PROBLEM IS THIS KI COMPONENT RERENDER HORA HAI CAUSE HUM COUNT KO PASS KR RAHE HAI TOH INCREMENT AND DECREMENT COMPONENT DONO HI RERENDER HORE HAI TOH YA TOH HUM USKO EK FUNCTION K ANDR PAAS KR DE JISSE WOH RERENDER NA HO{
+    //     setCount(function(count){
+    //         return count+1;
+    //     }) why is this  better ? this is better bc setCount this is not depend upon count anymore SO we can remove count as a dependency
+    // } YA PHIR WAISE HI RHNE DE setCount(count+1);
+    
 
-    }
-
-    function handleDecrement() {
-        
-    }
-    // Your code ends here
+    const handleDecrement=usecallback(()=> {
+        setCount(count => count -1 );
+    },[])
+    // Your code ends hered     
 
     return (
         <div>
@@ -23,9 +32,9 @@ export function Assignment1() {
     );
 };
 
-const CounterButtons = ({ onIncrement, onDecrement }) => (
+const CounterButtons = memo(({ onIncrement, onDecrement }) => (
     <div>
         <button onClick={onIncrement}>Increment</button>
         <button onClick={onDecrement}>Decrement</button>
     </div>
-);
+));
