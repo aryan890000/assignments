@@ -5,7 +5,12 @@
 */
 
 function isAnagram(str1, str2) {
-
+  if(str1.length !== str2.length) {
+    return false;
+  }
+  const string1 = str1.toLowerCase();
+  const string2 = str2.toLowerCase();
+  return string1.split('').sort().join('') === string2.split('').sort().join('');
 }
-
+console.log(isAnagram('hello','olleh'));
 module.exports = isAnagram;
