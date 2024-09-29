@@ -1,6 +1,19 @@
+import User from "../db/index";
+
+async function validUser(uname, pwd) {
+  const user = await User.findOne({ username: uname, password: pwd });
+  return user ? true : false;
+}
+
 function userMiddleware(req, res, next) {
-    // Implement user auth logic
-    // You need to check the headers and validate the user from the user DB. Check readme for the exact headers to be expected
+  const username = req.headers.username;
+  const pwd = req.headers.password;
+
+  if (!validUser(username, pwd)) {
+    return res.status(404).json({ msg: "Invalid credentials" });
+  }
+
+  next();
 }
 
 module.exports = userMiddleware;
