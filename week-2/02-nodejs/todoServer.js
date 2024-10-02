@@ -101,9 +101,9 @@ app.use('*', function (req, res) {
   res.status(404).send("No route found");
 })
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`server running on PORT: ${PORT}`);
-})
+// const PORT = 3000;
+// app.listen(PORT, () => {
+//   console.log(`server running on PORT: ${PORT}`);
+// })
 
 module.exports = app;
