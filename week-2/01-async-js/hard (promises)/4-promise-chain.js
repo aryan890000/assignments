@@ -5,20 +5,44 @@
  * Compare it with the results from 3-promise-all.js
  */
 
-function wait1(t) {
+function promises(t) {
+    return new Promise((resolve) => {
+        setTimeout(async () => {
+            resolve();
+        }, t * 1000)
+    });
+}
 
+function wait1(t) {
+    return promises(t);
 }
 
 function wait2(t) {
-
+    return promises(t);
 }
 
 function wait3(t) {
-
+    return promises(t);
 }
 
-function calculateTime(t1, t2, t3) {
+async function calculateTime(t1, t2, t3) {
+    
+    const start = Date.now();
+    
+    return wait1(t1).then(() => wait2(t2)).then(() => wait3(t3)).then(() => {
+        const end = Date.now();
+        return end - start;
+    });
 
+
+    // Without Promise Chaining
+
+    // await wait1(t1);
+    // await wait2(t2);
+    // await wait3(t3);
+    
+    // const end = Date.now();
+    // return end - start; // Return the time taken in milliseconds
 }
 
 module.exports = calculateTime;

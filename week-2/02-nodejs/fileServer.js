@@ -17,5 +17,35 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
+const PORT = 3000;
+
+app.get("/files", (req, res) => {
+  fs.readdir('./files', (err, files) => {
+    if (err) throw err;
+    res.status(200).json({files});
+  });
+});
+
+app.get("/file/:filename", (req, res) => {
+  
+  let fileName = req.params.filename;
+  
+  fs.readFile(`./files/${fileName}`, 'utf-8', (err, data) => {
+    if (err) {
+      res.status(404).send("File not found"); // send() is used to send body in response.
+    } else if (data) {
+      res.status(200).send(data);
+    }
+  })
+});
+
+app.use((req, res) => {
+  res.status(404).send("Route not found");
+});
+
+app.listen(PORT, function() {
+  console.log(`Server running at port, ${PORT}`);
+});
+
 
 module.exports = app;
